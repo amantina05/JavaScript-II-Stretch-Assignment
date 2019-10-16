@@ -56,3 +56,34 @@ module.exports = {
   NPC,
   Humanoid,
 };
+
+
+function GameObject (attributes) {
+    this.createdAt = attributes.createdAt
+    this.dimensions = attributes.dimensions
+}
+GameObject.prototype.destroy = function () {
+  return `Game object was removed from the game.`
+}
+
+function NPC (attributes, createdAt, dimensions, hp, name) {
+  //use .call to use the attributes from the class above
+  GameObject.call(this, attributes, createdAt, dimensions)
+  this.hp = attributes.hp
+  this.name = attributes.name
+}
+
+NPC.prototype.takeDamage = function () {
+  return `${this.name} took damage.`
+}
+
+function Humanoid (attributes, createdAt, dimensions, faction, weapons, language) {
+  NPC.call(this, attributes, createdAt, dimensions, faction, weapons, language)
+  this.faction = attributes.faction
+  this.weapons = attributes.weapons
+  this.language = attributes.language
+}
+
+Humanoid.prototype.greet = function () {
+  return `${this.name} offers a greeting in ${this.language}`
+}
